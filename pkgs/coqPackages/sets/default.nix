@@ -37,7 +37,7 @@ mkCoqDerivation {
     ] null;
 
   release."539782edb2d8691ebfdb0a76bdcafac4c9d16f7e".sha256 = "sha256-YKzg4k70YbnK1XFSSXMKXkxA7tk4pTUPXCLkf9ULsDQ=";
-  
+
   installPhase = ''
     runHook preInstall
     mkdir -p $out/lib/coq/${coq.coq-version}/user-contrib/SetsClass
