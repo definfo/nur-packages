@@ -35,7 +35,6 @@ in
   overlays = import ./overlays; # nixpkgs overlays
 
   lyricer = pkgs.callPackage ./pkgs/lyricer { source = source.lyricer; };
-  audacious = pkgs.qt6Packages.callPackage ./pkgs/audacious { source = source.audacious; };
   rime-ls = pkgs.callPackage ./pkgs/rime-ls { source = source.rime-ls; };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper {
     source = source.sjtu-canvas-helper;
