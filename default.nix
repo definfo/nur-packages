@@ -35,7 +35,7 @@ in
   overlays = import ./overlays; # nixpkgs overlays
 
   lyricer = pkgs.callPackage ./pkgs/lyricer { source = source.lyricer; };
-  rime-ls = pkgs.callPackage ./pkgs/rime-ls { source = source.rime-ls; };
+  rime-ls = (pkgs.callPackage ./pkgs/rime-ls { source = source.rime-ls; }).override { rimeDataPkgs = [ (pkgs.callPackage ./pkgs/rime-ice { }) ]; };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper {
     source = source.sjtu-canvas-helper;
   };
