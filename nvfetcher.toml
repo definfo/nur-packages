@@ -1,7 +1,3 @@
-[audacious]
-src.github = "audacious-media-player/audacious"
-fetch.github = "audacious-media-player/audacious"
-
 [flexcpp]
 src.git = "https://gitlab.com/fbb-git/flexcpp"
 fetch.git = "https://gitlab.com/fbb-git/flexcpp"
