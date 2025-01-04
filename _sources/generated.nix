@@ -24,37 +24,25 @@
       fetchSubmodules = false;
       sha256 = "sha256-sviP/0b77uu+C9ihfHnYNwIehStBp5m2WIDW9sqVq1k=";
     };
-    cargoLock."Cargo.lock" = {
-      lockFile = ./lyricer-f0f8d99b23102755ce7c70830127b23cfde96f3e/Cargo.lock;
-      outputHashes = {
-        
-      };
-    };
     date = "2020-11-15";
   };
   rime-ls = {
     pname = "rime-ls";
-    version = "v0.4.0";
+    version = "v0.4.1";
     src = fetchFromGitHub {
       owner = "wlh320";
       repo = "rime-ls";
-      rev = "v0.4.0";
+      rev = "v0.4.1";
       fetchSubmodules = false;
-      sha256 = "sha256-ZqoRFIF3ehfEeTN+ZU+/PAzA4JyS1403+sqZdzwJHA8=";
-    };
-    cargoLock."Cargo.lock" = {
-      lockFile = ./rime-ls-v0.4.0/Cargo.lock;
-      outputHashes = {
-        "librime-sys-0.1.0" = "sha256-zJShR0uaKH42RYjTfrBFLM19Jaz2r/4rNn9QIumwTfA=";
-      };
+      sha256 = "sha256-IhrfUPC+7Gsg2n6nsGiK/wRoFGKtLXsRLQBw6XIVu0U=";
     };
   };
   sjtu-canvas-helper = {
     pname = "sjtu-canvas-helper";
-    version = "1.3.19";
+    version = "1.3.23";
     src = fetchurl {
-      url = "https://github.com/Okabe-Rintarou-0/SJTU-Canvas-Helper/releases/download/app-v1.3.19/sjtu-canvas-helper_1.3.19_amd64.deb";
-      sha256 = "sha256-dQUgiX2zWZA/2sH3gFPkZ7OQbyEJxEtG61piwmncFNU=";
+      url = "https://github.com/Okabe-Rintarou-0/SJTU-Canvas-Helper/releases/download/app-v1.3.23/sjtu-canvas-helper_1.3.23_amd64.deb";
+      sha256 = "sha256-vNnz4jJmoy4XdtDakfbBu66hIEspfmxjsa3kguwKB+0=";
     };
   };
 }
