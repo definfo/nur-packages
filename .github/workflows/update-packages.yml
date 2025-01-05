@@ -1,5 +1,6 @@
 name: "Update package metadata"
 on:
+  workflow_dispatch:
   schedule:
     # update everyday at 3:00
     # TIP: Choose a random time here so not all repositories are build at once:
@@ -60,7 +61,7 @@ jobs:
           Please review the changes and merge if appropriate.
         branch: auto-update-pr
         delete-branch: true
-        base: main
+        base: master
         labels: |
             automated
             ready-to-merge  # Mergify can use this label
