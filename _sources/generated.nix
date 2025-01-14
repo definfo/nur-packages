@@ -3,17 +3,17 @@
 {
   flexcpp = {
     pname = "flexcpp";
-    version = "dcc05b1f1d2610572666b7ac77200ed41f558503";
+    version = "409fb23687671dd6b4c2c59d70e6000f66e29f05";
     src = fetchgit {
       url = "https://gitlab.com/fbb-git/flexcpp";
-      rev = "dcc05b1f1d2610572666b7ac77200ed41f558503";
+      rev = "409fb23687671dd6b4c2c59d70e6000f66e29f05";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-hnsWJATdA24kxuOmH7x8HMH9nPFXAAThofXvshuWk0s=";
+      sha256 = "sha256-hsBXK7tjWG+Qwc3dJiswGAcRUallJMwZ+mckQcNRqXk=";
     };
-    date = "2024-06-22";
+    date = "2025-01-13";
   };
   lyricer = {
     pname = "lyricer";
