@@ -1,5 +1,5 @@
 {
-  source,
+  fetchFromGitHub,
   lib,
   rustPlatform,
   dbus,
@@ -7,7 +7,15 @@
 }:
 
 rustPlatform.buildRustPackage {
-  inherit (source) pname src version;
+  pname = "lyricer";
+  version = "1.0.3";
+
+  src = fetchFromGitHub {
+    owner = "moelife-coder";
+    repo = "lyricer";
+    rev = "f0f8d99b23102755ce7c70830127b23cfde96f3e";
+    sha256 = "sha256-sviP/0b77uu+C9ihfHnYNwIehStBp5m2WIDW9sqVq1k=";
+  };
 
   useFetchCargoVendor = true;
 

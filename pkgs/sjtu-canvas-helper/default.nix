@@ -6,7 +6,7 @@
   wrapGAppsHook3,
   autoPatchelfHook,
   openssl_1_1,
-  webkitgtk,
+  webkitgtk_4_0,
   udev,
   libayatana-appindicator,
 }:
@@ -22,7 +22,7 @@ stdenv.mkDerivation {
 
   buildInputs = [
     openssl_1_1 # ! insecure
-    webkitgtk
+    webkitgtk_4_0
     stdenv.cc.cc
   ];
 
