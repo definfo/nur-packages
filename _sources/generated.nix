@@ -3,10 +3,10 @@
 {
   sjtu-canvas-helper = {
     pname = "sjtu-canvas-helper";
-    version = "1.3.23";
+    version = "1.3.24";
     src = fetchurl {
-      url = "https://github.com/Okabe-Rintarou-0/SJTU-Canvas-Helper/releases/download/app-v1.3.23/sjtu-canvas-helper_1.3.23_amd64.deb";
-      sha256 = "sha256-vNnz4jJmoy4XdtDakfbBu66hIEspfmxjsa3kguwKB+0=";
+      url = "https://github.com/Okabe-Rintarou-0/SJTU-Canvas-Helper/releases/download/app-v1.3.24/sjtu-canvas-helper_1.3.24_amd64.deb";
+      sha256 = "sha256-aaQ5/KXRHGjcUSaufn+3LoWYfFLfnB/MvM9HzhF8144=";
     };
   };
 }
