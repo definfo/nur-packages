@@ -38,6 +38,7 @@ in
 
   aya-prover = pkgs.callPackage ./pkgs/aya-prover { };
   aya-prover-lsp = pkgs.callPackage ./pkgs/aya-prover { mainProgram = "aya-lsp"; };
+  flexfox-css = pkgs.callPackage ./pkgs/flexfox { };
   lyricer = pkgs.callPackage ./pkgs/lyricer { };
   rime-ice = pkgs.callPackage ./pkgs/rime-ice { };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper { };
