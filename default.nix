@@ -41,7 +41,6 @@ in
   lyricer = pkgs.callPackage ./pkgs/lyricer { };
   rime-ice = pkgs.callPackage ./pkgs/rime-ice { };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper { };
-  smartdns-rs = pkgs.callPackage ./pkgs/smartdns-rs { };
 
   coqPackages = {
     inherit sets fixedpoints monadlib;
