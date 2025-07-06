@@ -8,6 +8,7 @@
 
 {
   pkgs ? import <nixpkgs> { },
+  rustPlatform ? null,
 }:
 
 let
@@ -44,7 +45,7 @@ in
   nsub = pkgs.callPackage ./pkgs/nsub { };
   rime-ice = pkgs.callPackage ./pkgs/rime-ice { };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper { };
-  waylrc = pkgs.callPackage ./pkgs/waylrc { };
+  waylrc = pkgs.callPackage ./pkgs/waylrc { inherit rustPlatform; };
 
   coqPackages = {
     inherit sets fixedpoints monadlib;
