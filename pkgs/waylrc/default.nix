@@ -4,18 +4,16 @@
   rustPlatform,
 }:
 
-rustPlatform.buildRustPackage (finalAttrs: {
+rustPlatform.buildRustPackage (_finalAttrs: {
   pname = "waylrc";
   version = "2.2.2";
 
   src = fetchFromGitHub {
     owner = "hafeoz";
     repo = "waylrc";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-VvGgrnlEIf3FJEk4e8v07QA6lHCaKF5pkJ3QszyObg4=";
+    rev = "63927f9260374ee2ed9dc17325f9fe55c9ebfc0f";
+    hash = "sha256-pomWIUVVyMpPYP7AyG7P7TTCeW1+T4hnR8fgtFm76uo=";
   };
-
-  patches = [ ./001-fix-player-rate.patch ];
 
   useFetchCargoVendor = true;
 
