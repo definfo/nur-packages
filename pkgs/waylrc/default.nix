@@ -4,20 +4,20 @@
   rustPlatform,
 }:
 
-rustPlatform.buildRustPackage (_finalAttrs: {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "waylrc";
-  version = "2.2.2";
+  version = "2.2.3-4";
 
   src = fetchFromGitHub {
     owner = "hafeoz";
     repo = "waylrc";
-    rev = "63927f9260374ee2ed9dc17325f9fe55c9ebfc0f";
-    hash = "sha256-pomWIUVVyMpPYP7AyG7P7TTCeW1+T4hnR8fgtFm76uo=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-18eKaL3bAmA9dO3H5ho9jG8KIKTj21UgW1O+/gWnkcc=";
   };
 
   useFetchCargoVendor = true;
 
-  cargoHash = "sha256-vCBwPhaSYbTvpus0ZbQplbsWIzVt8SqkauXh1lneRgw=";
+  cargoHash = "sha256-zYtRQ7KhG7z+FOaeT7juvgtsLCNlXW9GGXfgh4PXSHo=";
 
   meta = {
     description = "An addon for waybar to display lyrics";
