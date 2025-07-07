@@ -2,14 +2,13 @@
 
 let SYSTEM = (nix eval --impure --raw --expr 'builtins.currentSystem')
 let PKGS = (nix eval --raw $".#packages.($SYSTEM)" --apply 'attrs: builtins.toString (builtins.attrNames attrs)' | split row ' ')
-let EXCLUDED_PKGS = [ lyricer aya-prover-lsp ]
+let EXCLUDED_PKGS = [ lyricer aya-prover-lsp waylrc ]
 
 let UPDATE_ARGS = {
     # custom version format
     aya-prover: ["--version-regex=v(.*)"]
     sjtu-canvas-helper: ["--version-regex=app-v(.*)"]
     smartdns-rs: ["--version-regex=v(.*)"]
-    waylrc: ["--version-regex=v(.*)"]
     # unstable update
     dnsmasq-china-list_smartdns: ["--version=main"]
     nsub: ["--version=main"]
