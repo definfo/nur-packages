@@ -6,13 +6,13 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "waylrc";
-  version = "2.2.3-4";
+  version = "2.2.3-6";
 
   src = fetchFromGitHub {
     owner = "hafeoz";
     repo = "waylrc";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-18eKaL3bAmA9dO3H5ho9jG8KIKTj21UgW1O+/gWnkcc=";
+    hash = "sha256-n9ExJei3cgrlINWhDCQP5KxTjanMkqLWP9SC8I5gKmY=";
   };
 
   useFetchCargoVendor = true;
