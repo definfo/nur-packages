@@ -146,7 +146,7 @@
     "rust-manifest": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-F8FPAXzyvncmDZOR7eEMGDaJfjxv4mhC69P0iU1dhuI=",
+        "narHash": "sha256-nH8XLVyCyP5/XK+P5Pw4H0Nv0GXniVu0ir1M0wr/h+E=",
         "type": "file",
         "url": "https://static.rust-lang.org/dist/channel-rust-nightly.toml"
       },
