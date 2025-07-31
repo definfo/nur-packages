@@ -26,7 +26,6 @@ rec {
   isla-sail = pkgs.ocamlPackages.callPackage ./pkgs/isla-sail {
     inherit sail;
   };
-  lyricer = pkgs.callPackage ./pkgs/lyricer { };
   nsub = pkgs.callPackage ./pkgs/nsub { };
   sail = pkgs.ocamlPackages.callPackage ./pkgs/sail { };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper { };
