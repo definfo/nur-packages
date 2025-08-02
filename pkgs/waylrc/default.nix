@@ -17,6 +17,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   cargoHash = "sha256-zYtRQ7KhG7z+FOaeT7juvgtsLCNlXW9GGXfgh4PXSHo=";
 
+  RUSTC_BOOTSTRAP = 1; # waylrc requires nightly feature
+
   meta = {
     description = "An addon for waybar to display lyrics";
     homepage = "https://github.com/hafeoz/waylrc";

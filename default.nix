@@ -8,7 +8,6 @@
 
 {
   pkgs ? import <nixpkgs> { },
-  rustPlatform ? null,
 }:
 
 let
@@ -29,7 +28,7 @@ rec {
   nsub = pkgs.callPackage ./pkgs/nsub { };
   sail = pkgs.ocamlPackages.callPackage ./pkgs/sail { };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper { };
-  waylrc = pkgs.callPackage ./pkgs/waylrc { inherit rustPlatform; };
+  waylrc = pkgs.callPackage ./pkgs/waylrc { };
 
   coqPackages = {
     sets = callCoqPackage ./pkgs/coqPackages/sets { };

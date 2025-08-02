@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -14,10 +10,6 @@
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    rust-manifest = {
-      url = "https://static.rust-lang.org/dist/channel-rust-nightly.toml";
-      flake = false;
     };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -28,8 +20,6 @@
   outputs =
     inputs@{
       flake-parts,
-      fenix,
-      rust-manifest,
       ...
     }:
     # See https://flake.parts/module-arguments for module arguments
@@ -52,16 +42,8 @@
           self',
           pkgs,
           lib,
-          system,
           ...
         }:
-        let
-          rustToolchain = (fenix.packages.${system}.fromManifestFile rust-manifest).minimalToolchain;
-          rustPlatform = pkgs.makeRustPlatform {
-            cargo = rustToolchain;
-            rustc = rustToolchain;
-          };
-        in
         {
           treefmt = {
             projectRootFile = "flake.nix";
@@ -82,7 +64,6 @@
 
           # https://flake.parts/options/git-hooks-nix.html
           # Example: https://github.com/cachix/git-hooks.nix/blob/master/template/flake.nix
-          pre-commit.settings.addGcRoot = true;
           pre-commit.settings.hooks = {
             commitizen.enable = true;
             eclint.enable = true;
@@ -90,7 +71,7 @@
             treefmt.enable = true;
           };
 
-          legacyPackages = import ./default.nix { inherit pkgs rustPlatform; };
+          legacyPackages = import ./default.nix { inherit pkgs; };
 
           packages = lib.filterAttrs (_: v: lib.isDerivation v) self'.legacyPackages;
 
