@@ -2,12 +2,12 @@
 
 let SYSTEM = (nix eval --impure --raw --expr 'builtins.currentSystem')
 let PKGS = (nix eval --raw $".#packages.($SYSTEM)" --apply 'attrs: builtins.toString (builtins.attrNames attrs)' | split row ' ')
-let EXCLUDED_PKGS = [ sarasa-term-sc-nerd sjtu-canvas-helper ]
+let EXCLUDED_PKGS = [ sarasa-term-sc-nerd ]
 
 let UPDATE_ARGS = {
     # custom version format
     aya-prover: ["--version-regex=v(.*)"]
-    # sjtu-canvas-helper: ["--version-regex=app-v(.*)"]
+    sjtu-canvas-helper: ["--version-regex=app-v(.*)"]
     smartdns-rs: ["--version-regex=v(.*)"]
     waylrc: ["--flake" "--version-regex=v(.*)"]
     # unstable update
