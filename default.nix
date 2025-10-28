@@ -7,7 +7,8 @@
 #     nix-build -A mypackage
 
 {
-  pkgs ? import <nixpkgs> { },
+  pkgs,
+  pkgs-24_05,
 }:
 
 let
@@ -19,10 +20,7 @@ rec {
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  # FIXME: wait for JDK25 fix
-  # aya-prover = pkgs.callPackage ./pkgs/aya-prover { };
   dnsmasq-china-list_smartdns = pkgs.callPackage ./pkgs/dnsmasq-china-list_smartdns { };
-  flexfox-css = pkgs.callPackage ./pkgs/flexfox-css { };
   nsub = pkgs.callPackage ./pkgs/nsub { };
   sarasa-term-sc-nerd = pkgs.callPackage ./pkgs/sarasa-term-sc-nerd { };
   sarasa-term-sc-nerd-unhinted = pkgs.callPackage ./pkgs/sarasa-term-sc-nerd {
@@ -30,6 +28,19 @@ rec {
   };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper { };
   waylrc = pkgs.callPackage ./pkgs/waylrc { };
+
+  # FIXME: wait for JDK25 fix
+  Aya = pkgs.callPackage ./pkgs/Aya {
+    jdk = pkgs-24_05.jdk22;
+    gradle = pkgs.gradle_9;
+  };
+  ayaPackages = pkgs.lib.recurseIntoAttrs (
+    pkgs.callPackage ./pkgs/top-level/agda-packages.nix {
+      inherit Aya;
+    }
+  );
+  inherit (ayaPackages) aya;
+  inherit (ayaPackages) aya-minimal;
 
   coqPackages = {
     sets = callCoqPackage ./pkgs/coqPackages/sets { };

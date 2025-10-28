@@ -2,19 +2,16 @@
 
 let SYSTEM = (nix eval --impure --raw --expr 'builtins.currentSystem')
 let PKGS = (nix eval --raw $".#packages.($SYSTEM)" --apply 'attrs: builtins.toString (builtins.attrNames attrs)' | split row ' ')
-let EXCLUDED_PKGS = [ sarasa-term-sc-nerd ]
+let EXCLUDED_PKGS = [ aya aya-minimal sarasa-term-sc-nerd-unhinted ]
 
 let UPDATE_ARGS = {
     # custom version format
-    aya-prover: ["--version-regex=v(.*)"]
+    Aya: ["--version-regex=v(.*)"]
     sjtu-canvas-helper: ["--version-regex=app-v(.*)"]
-    smartdns-rs: ["--version-regex=v(.*)"]
-    waylrc: ["--flake" "--version-regex=v(.*)"]
+    waylrc: ["--version-regex=v(.*)"]
     # unstable update
     dnsmasq-china-list_smartdns: ["--version=branch"]
     nsub: ["--version=branch"]
-    sail: ["--version=branch"]
-    isla-sail: ["--version=branch"]
 }
 
 def update_package [pkg: string, verbose: bool] {
@@ -22,46 +19,16 @@ def update_package [pkg: string, verbose: bool] {
 
     # Check if package file exists
     let pkg_file = $"pkgs/($pkg)/default.nix"
-    if not ($pkg_file | path exists) {
-        print $"Warning: ($pkg_file) not found, skipping git status check."
-
-        # Get update arguments for this package
-        let args = ($UPDATE_ARGS | get -i $pkg | default [])
-
-        # Run nix-update anyway
-        let update_result = try {
-            if ($args | is-empty) {
-                ^nix-update $pkg | complete
-            } else {
-                ^nix-update $pkg ...$args | complete
-            }
-        } catch { |e|
-            print $"Error updating ($pkg): ($e.msg)"
-            return
-        }
-
-        if $update_result.exit_code != 0 {
-        print $"Error updating ($pkg): program exited with error ($update_result.exit_code)\):"
-            print $update_result.stderr
-        } else {
-            print $"Update command completed for ($pkg)."
-            if $verbose and not ($update_result.stdout | is-empty) {
-                print $"nix-update output:"
-                print $update_result.stdout
-            }
-        }
-        return
-    }
 
     let hash_before = (open $pkg_file | hash sha256)
 
-    let args = ($UPDATE_ARGS | get -i $pkg | default [])
+    let args = ($UPDATE_ARGS | get -o $pkg | default [])
 
     let update_result = try {
         if ($args | is-empty) {
-            ^nix-update $pkg | complete
+            ^nix-update --flake $pkg | complete
         } else {
-            ^nix-update $pkg ...$args | complete
+            ^nix-update --flake $pkg ...$args | complete
         }
     } catch { |e|
         print $"😾 Error updating ($pkg): ($e.msg)"
@@ -88,7 +55,7 @@ def update_package [pkg: string, verbose: bool] {
     if $hash_before == $hash_after {
         print $"🐖 No update needed for ($pkg)."
     } else {
-        print $"🐖 Successfully updated ($pkg)."
+        print $"😺 Successfully updated ($pkg)."
     }
 }
 

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-24_05.url = "github:NixOS/nixpkgs/release-24.05";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -42,8 +43,14 @@
           self',
           pkgs,
           lib,
+          system,
           ...
         }:
+        let
+          pkgs-24_05 = import inputs.nixpkgs-24_05 {
+            inherit system;
+          };
+        in
         {
           treefmt = {
             projectRootFile = "flake.nix";
@@ -72,7 +79,7 @@
             treefmt.enable = true;
           };
 
-          legacyPackages = import ./default.nix { inherit pkgs; };
+          legacyPackages = import ./default.nix { inherit pkgs pkgs-24_05; };
 
           packages = lib.filterAttrs (_: v: lib.isDerivation v) self'.legacyPackages;
 
@@ -86,7 +93,9 @@
               echo 1>&2 "Welcome to the development shell!"
             '';
 
-            packages = [ pkgs.nushell ];
+            nativeBuildInputs = [
+              pkgs.nushell
+            ];
           };
         };
     };
