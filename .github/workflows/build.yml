@@ -22,6 +22,8 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    env:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,16 +31,12 @@ jobs:
           persist-credentials: false
       - name: Install nix
         uses: nixbuild/nix-quick-install-action@63ca48f939ee3b8d835f4126562537df0fee5b91 # v32
-      - name: Run cachix
-        uses: cachix/cachix-action@ee79db531bfb851a7cf47035057b7cca88d26449 # 2025-08-15
-        with:
-          name: definfo
-          # If you chose signing key for write access
-          # signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-          # If you chose API tokens for write access OR if you have a private cache
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build nix packages
-        run: NIX_PATH=nixpkgs=flake:nixpkgs nix run nixpkgs#nix-build-uncached -- ci.nix -A cacheOutputs
+        run: |
+          nix run nixpkgs#nix-fast-build -- --no-nom \
+            --skip-cached \
+            --flake ".#legacyPackages.$(nix eval --raw --impure --expr builtins.currentSystem)" \
+            --cachix-cache '${{ matrix.nurRepo }}'
       - name: Trigger NUR update
         # Don't replace <YOUR_REPO_NAME> here!
         if: ${{ matrix.nurRepo != '<YOUR_REPO_NAME>' }}
