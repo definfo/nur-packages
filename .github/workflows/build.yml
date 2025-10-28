@@ -38,7 +38,6 @@ jobs:
       - name: Build nix packages
         run: |
           nix run nixpkgs#nix-fast-build -- \
-            --skip-cached \
             --no-nom \
             --cachix-cache '${{ matrix.nurRepo }}' \
             --flake ".#legacyPackages.$(nix eval --raw --impure --expr builtins.currentSystem)"
