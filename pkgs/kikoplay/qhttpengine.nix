@@ -15,6 +15,11 @@ stdenv.mkDerivation {
     hash = "sha256-/x8MuxCg08p+lRL/swVuy63EQl88+Xd4GY3LdwHJsIQ=";
   };
 
+  postPatch = ''
+    substituteInPlace CMakeLists.txt \
+      --replace-fail "cmake_minimum_required(VERSION 3.2.0)" "cmake_minimum_required(VERSION 3.12)"
+  '';
+
   nativeBuildInputs = [
     cmake
     qt6.wrapQtAppsHook

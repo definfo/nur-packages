@@ -54,6 +54,10 @@ stdenv.mkDerivation (finalAttrs: {
     ./0001-change-ldflags-and-install-paths.patch
     # replace Qt5 with Qt6 in CMakeLists.txt
     ./0002-fix-cmake-qt-version.patch
+  ]
+  ++ lib.optionals (stdenv.isLinux && lib.strings.versionAtLeast qt6.qtbase.version "6.9.0") [
+    # fix "[libmpv_render] There is already a mpv_render_context set."
+    ./0003-fix-mpv-initializeGL.patch
   ];
 
   postPatch = ''
