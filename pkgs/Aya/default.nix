@@ -5,6 +5,7 @@
   lib,
   gradle,
   jdk,
+  nix-update-script,
   mainProgram ? "aya",
 }:
 
@@ -77,6 +78,8 @@ stdenv.mkDerivation (finalAttrs: {
 
     runHook postInstall
   '';
+
+  passthru.updateScript = nix-update-script { extraArgs = [ "--version-regex=v(.*)" ]; };
 
   meta = {
     description = "Proof assistant designed for formalizing math and type-directed programming";

@@ -20,6 +20,7 @@
 
   outputs =
     inputs@{
+      nixpkgs,
       flake-parts,
       ...
     }:
@@ -46,12 +47,15 @@
           system,
           ...
         }:
-        let
-          pkgs-24_05 = import inputs.nixpkgs-24_05 {
-            inherit system;
-          };
-        in
         {
+          _module.args.pkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              (_final: _prev: {
+                inherit (inputs.nixpkgs-24_05.packages.${system}) jdk22;
+              })
+            ];
+          };
           treefmt = {
             projectRootFile = "flake.nix";
             settings.global.excludes = [
@@ -64,6 +68,11 @@
               actionlint.enable = true;
               deadnix.enable = true;
               nixfmt.enable = true;
+              shellcheck = {
+                enable = true;
+                package = pkgs.shellcheck-minimal;
+              };
+              shfmt.enable = true;
               statix.enable = true;
               # zizmor.enable = true;
             };
@@ -72,6 +81,7 @@
           # https://flake.parts/options/git-hooks-nix.html
           # Example: https://github.com/cachix/git-hooks.nix/blob/master/template/flake.nix
           pre-commit.settings.package = pkgs.prek;
+          pre-commit.settings.configPath = ".pre-commit-config.flake.yaml";
           pre-commit.settings.hooks = {
             commitizen.enable = true;
             eclint.enable = true;
@@ -79,7 +89,7 @@
             treefmt.enable = true;
           };
 
-          legacyPackages = import ./default.nix { inherit pkgs pkgs-24_05; };
+          legacyPackages = import ./default.nix { inherit pkgs; };
 
           packages = lib.filterAttrs (_: v: lib.isDerivation v) self'.legacyPackages;
 
@@ -87,14 +97,6 @@
             inputsFrom = [
               config.treefmt.build.devShell
               config.pre-commit.devShell
-            ];
-
-            shellHook = ''
-              echo 1>&2 "Welcome to the development shell!"
-            '';
-
-            nativeBuildInputs = [
-              pkgs.nushell
             ];
           };
         };

@@ -16,11 +16,12 @@
   desktop-file-utils,
   jq,
   moreutils,
+  nix-update-script,
 }:
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "sjtu-canvas-helper";
-  version = "2.0.4";
+  version = "app-v2.0.4";
 
   src = fetchFromGitHub {
     owner = "Okabe-Rintarou-0";
@@ -85,6 +86,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
   cargoRoot = "src-tauri";
   # And make sure we build there too
   buildAndTestSubdir = finalAttrs.cargoRoot;
+
+  passthru.updateScript = nix-update-script { extraArgs = [ "--version-regex=app-v(.*)" ]; };
 
   meta = {
     description = "An assistant tool for SJTU Canvas online course platform";

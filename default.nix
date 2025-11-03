@@ -7,8 +7,7 @@
 #     nix-build -A mypackage
 
 {
-  pkgs,
-  pkgs-24_05,
+  pkgs ? import <nixpkgs> { },
 }:
 
 let
@@ -21,17 +20,15 @@ rec {
   overlays = import ./overlays; # nixpkgs overlays
 
   dnsmasq-china-list_smartdns = pkgs.callPackage ./pkgs/dnsmasq-china-list_smartdns { };
+  kikoplay = pkgs.callPackage ./pkgs/kikoplay { };
   nsub = pkgs.callPackage ./pkgs/nsub { };
   sarasa-term-sc-nerd = pkgs.callPackage ./pkgs/sarasa-term-sc-nerd { };
-  sarasa-term-sc-nerd-unhinted = pkgs.callPackage ./pkgs/sarasa-term-sc-nerd {
-    variance = "unhinted";
-  };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper { };
   waylrc = pkgs.callPackage ./pkgs/waylrc { };
 
   # FIXME: wait for JDK25 fix
   Aya = pkgs.callPackage ./pkgs/Aya {
-    jdk = pkgs-24_05.jdk22;
+    jdk = pkgs.jdk22;
     gradle = pkgs.gradle_9;
   };
   ayaPackages = pkgs.lib.recurseIntoAttrs (
