@@ -52,7 +52,7 @@
             inherit system;
             overlays = [
               (_final: _prev: {
-                inherit (inputs.nixpkgs-24_05.packages.${system}) jdk22;
+                inherit (inputs.nixpkgs-24_05.legacyPackages.${system}) jdk22;
               })
             ];
           };
