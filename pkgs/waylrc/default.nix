@@ -20,7 +20,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   RUSTC_BOOTSTRAP = 1; # waylrc requires nightly feature
 
-  passthru.updateScript = nix-update-script { extraArgs = [ "--version-regex=v(.*)" ]; };
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "An addon for waybar to display lyrics";

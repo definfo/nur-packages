@@ -87,7 +87,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   # And make sure we build there too
   buildAndTestSubdir = finalAttrs.cargoRoot;
 
-  passthru.updateScript = nix-update-script { extraArgs = [ "--version-regex=app-v(.*)" ]; };
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "An assistant tool for SJTU Canvas online course platform";

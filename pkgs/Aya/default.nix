@@ -79,7 +79,7 @@ stdenv.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  passthru.updateScript = nix-update-script { extraArgs = [ "--version-regex=v(.*)" ]; };
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "Proof assistant designed for formalizing math and type-directed programming";
