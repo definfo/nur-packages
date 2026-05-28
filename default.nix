@@ -16,6 +16,7 @@
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
+  cli-proxy-api = pkgs.callPackage ./pkgs/cli-proxy-api { };
   dnsmasq-china-list_smartdns = pkgs.callPackage ./pkgs/dnsmasq-china-list_smartdns { };
   kikoplay = pkgs.callPackage ./pkgs/kikoplay { };
   nsub = pkgs.callPackage ./pkgs/nsub { };
