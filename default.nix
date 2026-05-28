@@ -10,10 +10,7 @@
   pkgs ? import <nixpkgs> { },
 }:
 
-let
-  callCoqPackage = pkgs.coqPackages_8_15.callPackage;
-in
-rec {
+{
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
@@ -25,14 +22,4 @@ rec {
   sarasa-term-sc-nerd = pkgs.callPackage ./pkgs/sarasa-term-sc-nerd { };
   sjtu-canvas-helper = pkgs.callPackage ./pkgs/sjtu-canvas-helper { };
   waylrc = pkgs.callPackage ./pkgs/waylrc { };
-
-  coqPackages = {
-    sets = callCoqPackage ./pkgs/coqPackages/sets { };
-    fixedpoints = (callCoqPackage ./pkgs/coqPackages/fixedpoints) {
-      inherit (coqPackages) sets;
-    };
-    monadlib = (callCoqPackage ./pkgs/coqPackages/monadlib) {
-      inherit (coqPackages) sets fixedpoints;
-    };
-  };
 }
