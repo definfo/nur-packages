@@ -86,6 +86,7 @@
               actionlint.enable = true;
               deadnix.enable = true;
               nixfmt.enable = true;
+              oxfmt.enable = true;
               shellcheck = {
                 enable = true;
                 package = pkgs.shellcheck-minimal;
@@ -102,7 +103,7 @@
           pre-commit.settings.configPath = ".pre-commit-config.flake.yaml";
           pre-commit.settings.hooks = {
             commitizen.enable = true;
-            eclint.enable = true;
+            oxlint.enable = true;
             markdownlint.enable = true;
             treefmt.enable = true;
           };
